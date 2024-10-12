@@ -1,0 +1,30 @@
+CC = gcc
+DEBUG = -g
+CFLAGS = -Wall -std=c99 -pedantic -c $(DEBUG)
+LFLAGS = -Wall -std=c99 -pedantic $(DEBUG)
+
+Simulator : SIM-01-Driver.o Simulator.o metaDataOps.o configOps.o StringUtils.o simtimer.o
+	$(CC) $(LFLAGS) SIM-01-Driver.o Simulator.o metaDataOps.o configOps.o StringUtils.o simtimer.o -o sim02
+
+SIM-01-Driver.o: SIM-01-Driver.c
+	$(CC) $(CFLAGS) SIM-01-Driver.c
+
+Simulator.o: Simulator.c
+	$(CC) $(CFLAGS) Simulator.c
+
+MetaDataOps.o: MetaDataOps.c
+	$(CC) $(CFLAGS) MetaDataOps.c
+
+ConfigOps.o: configOps.c
+	$(CC) $(CFLAGS) ConfigOps.c
+
+StringUtils.o: StringUtils.c
+	$(CC) $(CFLAGS) StringUtils.c
+
+simTimer.o: simtimer.c
+	$(CC) $(CFLAGS) simtimer.c
+
+# use \rm for unix machines and del for windows machines
+clean:
+	rm *.o sim02
+	rm sim02.exe
